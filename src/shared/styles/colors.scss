@@ -1,0 +1,35 @@
+@use "sass:map";
+
+$dark-theme: (
+  bg: #121212,
+  surface: #1e1e1e,
+  overlay: #2c2c2c,
+  text-primary: #e0e0e0,
+  text-secondary: #b0b0b0,
+  border: #333333,
+  accent: #FA003F,
+  accent-light: #ff6b6b,
+  accent-dark: #a83232,
+  warning: #ffb74d,
+  success: #81c784,
+  info: #64b5f6,
+);
+
+$light-theme: (
+  bg: #fff,
+  surface: #f0f0f0,
+  overlay: #e0e0e0,
+  text-primary: #222222,
+  text-secondary: #555555,
+  border: #cccccc,
+  accent: #c62828,
+  accent-light: #ff8a80,
+  accent-dark: #8e0000,
+  warning: #ffa726,
+  success: #66bb6a,
+  info: #42a5f5,
+);
+
+@function color($theme, $key) {
+  @return map.get($theme, $key);
+}

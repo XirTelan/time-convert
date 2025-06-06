@@ -1,0 +1,36 @@
+@use "./shared/styles/colors.scss";
+@use "./shared/styles/mixins";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  @include mixins.theme-vars(colors.$light-theme);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] {
+  @include mixins.theme-vars(colors.$dark-theme);
+}
+
+:global #root {
+  display: grid;
+  grid-template-rows: 10% 1fr 10%;
+  width: 100%;
+  height: 100vh;
+}

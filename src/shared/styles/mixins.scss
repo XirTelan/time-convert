@@ -1,0 +1,16 @@
+@use "colors";
+
+@mixin theme-vars($theme) {
+  --color-bg: #{colors.color($theme, bg)};
+  --color-surface: #{colors.color($theme, surface)};
+  --color-overlay: #{colors.color($theme, overlay)};
+  --color-text-primary: #{colors.color($theme, "text-primary")};
+  --color-text-secondary: #{colors.color($theme, "text-secondary")};
+  --color-border: #{colors.color($theme, border)};
+  --color-accent: #{colors.color($theme, accent)};
+  --color-accent-light: #{colors.color($theme, "accent-light")};
+  --color-accent-dark: #{colors.color($theme, "accent-dark")};
+  --color-warning: #{colors.color($theme, warning)};
+  --color-success: #{colors.color($theme, success)};
+  --color-info: #{colors.color($theme, info)};
+}
