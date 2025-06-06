@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import ThemeSwitch from "../../components/ThemeSwitch/ThemeSwitch";
 import { container } from "./Header.module.scss";
 
 const Header = () => {
