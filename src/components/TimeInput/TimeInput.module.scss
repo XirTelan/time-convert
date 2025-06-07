@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.timeWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+
+  .label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+}
+
+.dateWrapper {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.input {
+  width: 100%;
+  background: var(--color-overlay);
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 4px var(--color-accent);
+  }
+}
+
+.timeInput {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.8rem;
+  height: 3rem;
+}
+
+.dateInput {
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  height: 2rem;
+  color: var(--color-text-secondary);
+}
