@@ -1,28 +1,34 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import ReactDOM from "react-dom";
 import * as styles from "./DropDown.module.scss";
-import useOutsideClick from "@/hooks/useOutsideClick";
+import useRegOutsideClick from "@/hooks/useOutsideClick";
 
 type DropDownProps = {
+  defaultValue?: string;
   options: string[];
   onSelect: (value: string) => void;
   label?: string;
 };
 
-const DropDown: React.FC<DropDownProps> = ({ options, onSelect, label }) => {
-  const [query, setQuery] = useState("");
+const DropDown: React.FC<DropDownProps> = ({
+  defaultValue = "",
+  options,
+  onSelect,
+  label,
+}) => {
+  const [query, setQuery] = useState(defaultValue);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
 
-  useOutsideClick<HTMLElement>({
+  useRegOutsideClick<HTMLElement>({
     ref: [containerRef, dropdownRef],
     action: () => setOpen(false),
   });
 
-  useEffect(() => {
-    if (open && containerRef.current) {
+  const handleFocus = () => {
+    if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       setDropdownStyle({
         top: rect.bottom + window.scrollY,
@@ -30,7 +36,8 @@ const DropDown: React.FC<DropDownProps> = ({ options, onSelect, label }) => {
         width: rect.width,
       });
     }
-  }, [open]);
+    setOpen(true);
+  };
 
   const filtered = options.filter((opt) =>
     opt.toLowerCase().includes(query.toLowerCase())
@@ -65,7 +72,7 @@ const DropDown: React.FC<DropDownProps> = ({ options, onSelect, label }) => {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => setOpen(true)}
+        onFocus={handleFocus}
         placeholder="Search..."
         className={styles.input}
       />
