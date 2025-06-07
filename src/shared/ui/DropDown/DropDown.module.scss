@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  width: 200px;
+  height: fit-content;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.dropdown {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.option {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+}
+
+.noResults {
+  padding: 0.5rem;
+  color: #999;
+}
