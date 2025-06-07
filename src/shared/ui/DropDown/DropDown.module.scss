@@ -13,12 +13,13 @@
 .input {
   width: 100%;
   padding: 0.5rem;
+  border: 0;
+  background: var(--color-overlay);
 }
 
 .dropdown {
   position: absolute;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--color-overlay);
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
@@ -27,10 +28,9 @@
 .option {
   padding: 0.5rem;
   cursor: pointer;
-  border-bottom: 1px solid #eee;
 
   &:hover {
-    background-color: #f3f3f3;
+    background-color: var(--color-accent);
   }
 }
 

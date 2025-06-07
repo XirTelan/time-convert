@@ -7,6 +7,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 html,
@@ -20,17 +21,20 @@ body {
 
 :root {
   @include mixins.theme-vars(colors.$light-theme);
+  color-scheme: light;
+
   background: var(--color-bg);
   color: var(--color-text-primary);
 }
 
 [data-theme="dark"] {
   @include mixins.theme-vars(colors.$dark-theme);
+  color-scheme: dark;
 }
 
 :global #root {
   display: grid;
-  grid-template-rows: 10% 1fr 10%;
+  grid-template-rows: 3rem 1fr 10%;
   width: 100%;
   height: 100vh;
 }

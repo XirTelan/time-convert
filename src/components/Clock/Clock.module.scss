@@ -1,10 +1,10 @@
 .timezone {
-  background-color: var(--color-accent);
+  background-color: var(--color-overlay);
   color: fff;
-  padding: 0.125rem;
+  padding: 0.25rem 0.5rem;
 }
 .clock {
-  font-size: 6rem;
+  font-size: clamp(14px, 10vw, 6rem);
   font-weight: 800;
   color: var(--color-accent);
 }
