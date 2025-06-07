@@ -14,6 +14,7 @@ type Action = {
   updateTimeZone: (timeZone: string, to: boolean) => void;
   updateOffset: (offset: number, to: boolean) => void;
   setMode: (mode: State["mode"]) => void;
+  setSelectedTime: (time: string) => void;
 };
 
 const useTimeStore = create<State & Action>((set) => ({
@@ -31,6 +32,7 @@ const useTimeStore = create<State & Action>((set) => ({
     set(() => (to ? { toOffset: offset } : { fromOffset: offset })),
 
   setMode: (mode) => set({ mode }),
+  setSelectedTime: (time) => set({ selectedTime: time }),
 }));
 
 export default useTimeStore;
