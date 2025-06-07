@@ -5,7 +5,9 @@ import { container } from "./Header.module.scss";
 const Header = () => {
   return (
     <header className={clsx(container)}>
-      <h1>Time Converter</h1>
+      <span style={{ color: "var(--color-accent-light)", fontWeight: 800 }}>
+        TimeConverter
+      </span>
       <ThemeSwitch />
     </header>
   );

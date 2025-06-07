@@ -7,8 +7,8 @@ type CardProps = {
   className?: CSSProperties;
 };
 
-const Card = ({ children,className }: CardProps) => {
-  return <div className={clsx(container, )}>{children}</div>;
+const Card = ({ children, className }: CardProps) => {
+  return <div className={clsx(container, className)}>{children}</div>;
 };
 
 export default Card;
