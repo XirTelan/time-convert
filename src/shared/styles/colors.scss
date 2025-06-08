@@ -16,18 +16,18 @@ $dark-theme: (
 );
 
 $light-theme: (
-  bg: #fff,
-  surface: #f0f0f0,
-  overlay: #e0e0e0,
-  text-primary: #222222,
-  text-secondary: #555555,
+  bg: #f4f6f9,
+  surface: #ffffff,
+  overlay: #f0f1f5,
+  text-primary: #1b1b1b,
+  text-secondary: #4a4a4a,
   border: #cccccc,
-  accent: #c62828,
-  accent-light: #ff8a80,
-  accent-dark: #8e0000,
-  warning: #ffa726,
-  success: #66bb6a,
-  info: #42a5f5,
+  accent: #fa003f,
+  accent-light: #ff6b6b,
+  accent-dark: #a83232,
+  warning: #ff9800,
+  success: #43a047,
+  info: #1976d2,
 );
 
 @function color($theme, $key) {
