@@ -1,55 +1,34 @@
 import useTimeStore from "@/hooks/useTimeStore";
-import Card from "@/shared/ui/Card/Card";
 import { TZDate } from "@date-fns/tz";
 import { addMinutes } from "date-fns";
 import { fromZonedTime, format } from "date-fns-tz";
+import * as styles from "./ResultBlock.module.scss";
 
-const ResultBlock = () => {
+export const ResultBlock = () => {
   const fromTimeZone = useTimeStore((state) => state.fromTimeZone);
   const toTimeZone = useTimeStore((state) => state.toTimeZone);
   const selectedTime = useTimeStore((state) => state.selectedTime);
+
   const utcDate = fromZonedTime(selectedTime, fromTimeZone);
   const fromTime = new TZDate(utcDate, fromTimeZone);
   const convertedDate = new TZDate(utcDate, toTimeZone);
   const convertedDateOff = addMinutes(convertedDate, 0);
 
   return (
-    <div>
-      <Card>
+    <div className={styles.wrapper}>
+      <div className={styles.toTime}>
+        <div>{toTimeZone}</div>
         <div>
-          <p>
-            From ({fromTimeZone}):{" "}
-            {format(fromTime, "yyyy-MM-dd z", {
-              timeZone: fromTimeZone,
-            })}
-          </p>
-          <p style={{ color: "var(--color-accent)" }}>
-            {format(fromTime, "HH:mm:ss", {
-              timeZone: fromTimeZone,
-            })}
-          </p>
-          <p>
-            To ({toTimeZone}):{" "}
-            {format(convertedDateOff, "yyyy-MM-dd z", {
-              timeZone: toTimeZone,
-            })}
-          </p>
+          {format(convertedDateOff, "yyyy-MM-dd z", {
+            timeZone: toTimeZone,
+          })}
         </div>
-      </Card>
-      <p
-        style={{
-          backgroundColor: "var(--color-accent)",
-          fontSize: "clamp(14px, 10vw, 6rem)",
-          fontWeight: 600,
-          padding: "0.5rem",
-        }}
-      >
+      </div>
+      <div className={styles.convertedTime}>
         {format(convertedDateOff, "HH:mm:ss", {
           timeZone: toTimeZone,
         })}
-      </p>
+      </div>
     </div>
   );
 };
-
-export default ResultBlock;
