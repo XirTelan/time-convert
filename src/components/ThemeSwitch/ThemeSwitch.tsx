@@ -3,7 +3,7 @@ import { Button } from "@/shared/ui/Button/Button";
 import { FaCloudMoon } from "react-icons/fa6";
 import { FaSun } from "react-icons/fa6";
 
-const ThemeSwitch = () => {
+export const ThemeSwitch = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -12,5 +12,3 @@ const ThemeSwitch = () => {
     </Button>
   );
 };
-
-export default ThemeSwitch;

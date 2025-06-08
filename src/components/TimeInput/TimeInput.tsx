@@ -3,7 +3,7 @@ import useTimeStore from "@/hooks/useTimeStore";
 import * as styles from "./TimeInput.module.scss";
 import clsx from "clsx";
 
-const TimeInput = () => {
+export const TimeInput = () => {
   const selectedTimeFromStore = useTimeStore((state) => state.selectedTime);
   const setSelectedTimeInStore = useTimeStore((state) => state.setSelectedTime);
 
@@ -32,7 +32,6 @@ const TimeInput = () => {
         />
       </div>
       <div className={styles.dateWrapper}>
-        <label className={styles.label}>Date:</label>
         <input
           type="date"
           value={selectedDate}
@@ -43,5 +42,3 @@ const TimeInput = () => {
     </div>
   );
 };
-
-export default TimeInput;

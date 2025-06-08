@@ -1,16 +1,19 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import * as styles from "./DropDown.module.scss";
 import useRegOutsideClick from "@/hooks/useOutsideClick";
 
 type DropDownProps = {
   defaultValue?: string;
-  options: string[];
+  options: {
+    value: string;
+    label: string;
+  }[];
   onSelect: (value: string) => void;
   label?: string;
 };
 
-const DropDown: React.FC<DropDownProps> = ({
+export const DropDown: React.FC<DropDownProps> = ({
   defaultValue = "",
   options,
   onSelect,
@@ -40,7 +43,7 @@ const DropDown: React.FC<DropDownProps> = ({
   };
 
   const filtered = options.filter((opt) =>
-    opt.toLowerCase().includes(query.toLowerCase())
+    opt.label.toLowerCase().includes(query.toLowerCase())
   );
 
   const dropdownContent = open ? (
@@ -48,15 +51,15 @@ const DropDown: React.FC<DropDownProps> = ({
       {filtered.length > 0 ? (
         filtered.map((opt) => (
           <li
-            key={opt}
+            key={opt.value}
             className={styles.option}
             onClick={() => {
-              onSelect(opt);
-              setQuery(opt);
+              onSelect(opt.value);
+              setQuery(opt.label);
               setOpen(false);
             }}
           >
-            {opt}
+            {opt.label}
           </li>
         ))
       ) : (
@@ -80,5 +83,3 @@ const DropDown: React.FC<DropDownProps> = ({
     </div>
   );
 };
-
-export default DropDown;

@@ -1,12 +1,12 @@
 import useTimeStore from "@/hooks/useTimeStore";
-import ToggleTabs from "@/shared/ui/ToggleTabs/ToggleTabs";
+import { ToggleTabs } from "@/shared/ui/";
 
 const options = [
   { label: "By Timezone", value: "timezone" as const },
   { label: "By Location", value: "location" as const },
 ];
 
-const ModeSwitch = () => {
+export const ModeSwitch = () => {
   const currentMode = useTimeStore((state) => state.mode);
   const setMode = useTimeStore((state) => state.setMode);
 
@@ -24,5 +24,3 @@ const ModeSwitch = () => {
     />
   );
 };
-
-export default ModeSwitch;

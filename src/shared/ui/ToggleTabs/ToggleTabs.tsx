@@ -9,7 +9,7 @@ type ToggleTabsProps = {
   disabled?: boolean;
 };
 
-const ToggleTabs= ({
+export const ToggleTabs = ({
   options,
   value,
   onChange,
@@ -34,5 +34,3 @@ const ToggleTabs= ({
     </div>
   );
 };
-
-export default ToggleTabs;

@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { timezone, clock } from "./Clock.module.scss";
 
-const Clock = () => {
+export const Clock = () => {
   const [time, setTime] = useState<TZDate>(new TZDate());
 
   useEffect(() => {
@@ -22,5 +22,3 @@ const Clock = () => {
     </div>
   );
 };
-
-export default Clock;
