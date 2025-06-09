@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { timezone, clock } from "./Clock.module.scss";
 
 export const Clock = () => {
-  const [time, setTime] = useState<TZDate>(new TZDate());
+  const [time, setTime] = useState<TZDate>(() => new TZDate());
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new TZDate());
     }, 1000);
-    () => {
+    return () => {
       clearInterval(timer);
     };
   }, []);
