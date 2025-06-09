@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
-import ReactDOM from "react-dom";
+import { FC } from "react";
 import * as styles from "./DropDown.module.scss";
-import useRegOutsideClick from "@/hooks/useOutsideClick";
+import useDropDown from "@/hooks/useDropDown";
+import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 type DropDownProps = {
   defaultValue?: string;
@@ -13,50 +14,43 @@ type DropDownProps = {
   label?: string;
 };
 
-export const DropDown: React.FC<DropDownProps> = ({
+export const DropDown: FC<DropDownProps> = ({
   defaultValue = "",
   options,
   onSelect,
   label,
 }) => {
-  const [query, setQuery] = useState(defaultValue);
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLUListElement>(null);
-  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
-
-  useRegOutsideClick<HTMLElement>({
-    ref: [containerRef, dropdownRef],
-    action: () => setOpen(false),
-  });
-
-  const handleFocus = () => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setDropdownStyle({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-      });
-    }
-    setOpen(true);
-  };
-
-  const filtered = options.filter((opt) =>
-    opt.label.toLowerCase().includes(query.toLowerCase())
-  );
+  const {
+    query,
+    open,
+    highlightedIndex,
+    containerRef,
+    dropdownRef,
+    dropdownStyle,
+    filtered,
+    setQuery,
+    setOpen,
+    setHighlightedIndex,
+    handleFocus,
+    handleKeyDown,
+  } = useDropDown({ defaultValue, options, onSelect });
 
   const dropdownContent = open ? (
     <ul ref={dropdownRef} className={styles.dropdown} style={dropdownStyle}>
       {filtered.length > 0 ? (
-        filtered.map((opt) => (
+        filtered.map((opt, index) => (
           <li
             key={opt.value}
-            className={styles.option}
+            className={clsx(
+              styles.option,
+              index === highlightedIndex && styles.highlighted
+            )}
+            onMouseEnter={() => setHighlightedIndex(index)}
             onClick={() => {
               onSelect(opt.value);
               setQuery(opt.label);
               setOpen(false);
+              setHighlightedIndex(-1);
             }}
           >
             {opt.label}
@@ -74,12 +68,17 @@ export const DropDown: React.FC<DropDownProps> = ({
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          if (!open) setOpen(true);
+          setQuery(e.target.value);
+          setHighlightedIndex(-1);
+        }}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
         placeholder="Search..."
         className={styles.input}
       />
-      {ReactDOM.createPortal(dropdownContent, document.body)}
+      {createPortal(dropdownContent, document.body)}
     </div>
   );
 };

@@ -30,8 +30,13 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--color-accent);
+    background: var(--color-accent);
   }
+}
+
+.highlighted {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
 .noResults {
