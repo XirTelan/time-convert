@@ -1,24 +1,30 @@
-import { TZDate } from "@date-fns/tz";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { timezone, clock } from "./Clock.module.scss";
+import { toZonedTime } from "date-fns-tz";
+import * as styles from "./Clock.module.scss";
 
-export const Clock = () => {
-  const [time, setTime] = useState<TZDate>(() => new TZDate());
+type ClockProps = {
+  size?: "lg" | "md";
+  label?: string;
+  timeZone: string;
+};
+
+export const Clock = ({ label, timeZone, size = "md" }: ClockProps) => {
+  const [now, setNow] = useState<Date>(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new TZDate());
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
+  const zonedDate = toZonedTime(now, timeZone);
+
   return (
-    <div>
-      <span className={timezone}>{format(time, "z")}</span>
-      <p className={clock}>{format(time, "HH:mm:ss")}</p>
+    <div className={styles.clockWrapper}>
+      <span className={styles.timezone}>{label ?? timeZone}</span>
+      <p className={size === "lg" ? styles.clockLg : styles.clockMd}>
+        {format(zonedDate, size === "lg" ? "HH:mm:ss" : "HH:mm")}
+      </p>
     </div>
   );
 };

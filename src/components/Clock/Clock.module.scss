@@ -1,10 +1,36 @@
-.timezone {
-  background-color: var(--color-overlay);
-  color: fff;
-  padding: 0.25rem 0.5rem;
+.clockWrapper {
+  background-color: var(--color-surface);
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+
+  &:has(.clockLg) {
+    background-color: transparent;
+  }
 }
-.clock {
+
+.timezone {
+  display: block;
+  background-color: var(--color-overlay);
+  color: var(--color-primary);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 0 auto 0.25rem auto;
+  max-width: 10rem;
+}
+
+.clockLg {
   font-size: clamp(14px, 10vw, 6rem);
   font-weight: 800;
   color: var(--color-accent);
+  margin: 0;
+}
+
+.clockMd {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
 }
