@@ -27,3 +27,8 @@ export const commonTimeZones = [
   { label: "CST (US)", value: "America/Chicago" },
   { label: "CST (China)", value: "Asia/Shanghai" },
 ];
+
+export const locations = Intl.supportedValuesOf("timeZone").map((tz) => ({
+  label: tz.replaceAll("/", " | ").replaceAll("_", " "),
+  value: tz,
+}));
