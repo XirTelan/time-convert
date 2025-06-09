@@ -1,32 +1,49 @@
 import { DropDown } from "@/shared/ui";
-import useTimeStore from "@/hooks/useTimeStore";
-import { useMemo } from "react";
-import { commonTimeZones } from "@/shared/contants/timezones";
+import useTimeSelector from "@/hooks/useTimeSelector";
+import * as styles from "./TimezoneSelector.module.scss";
+import { clamp } from "date-fns";
 
-export const TimezoneSelector = ({ to = false }: { to?: boolean }) => {
-  const mode = useTimeStore((state) => state.mode);
-  const timeZone = useTimeStore((state) =>
-    to ? state.toTimeZone : state.fromTimeZone
-  );
-  const updateTimeZone = useTimeStore((state) => state.updateTimeZone);
+type Props = {
+  to?: boolean;
+};
 
-  const locations = useMemo(() => {
-    return Intl.supportedValuesOf("timeZone").map((tz) => ({
-      label: tz.replaceAll("/", " | ").replaceAll("_", " "),
-      value: tz,
-    }));
-  }, []);
+export const TimezoneSelector = ({ to = false }: Props) => {
+  const { mode, timeZone, offset, updateOffset, updateTimeZone, options } =
+    useTimeSelector(to ? "to" : "from");
 
   const handleSelect = (value: string) => {
     updateTimeZone(value, to);
   };
 
+  const handleOffsetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Math.max(-12, Math.min(Number(e.target.value) ?? 0, 12));
+    updateOffset(val, to);
+  };
+
   return (
-    <DropDown
-      defaultValue={timeZone}
-      label={to ? "To:" : "From:"}
-      options={mode === "timezone" ? commonTimeZones : locations}
-      onSelect={handleSelect}
-    />
+    <div className={styles.selector}>
+      <DropDown
+        defaultValue={timeZone}
+        label={to ? "To:" : "From:"}
+        options={options}
+        onSelect={handleSelect}
+      />
+      {mode === "timezone" && (
+        <div className={styles.offsetInput}>
+          <label htmlFor={`offset-${to ? "to" : "from"}`}>
+            Offset (±0-12):
+          </label>
+          <input
+            id={`offset-${to ? "to" : "from"}`}
+            type="number"
+            min={-12}
+            max={12}
+            step={1}
+            value={offset}
+            onChange={handleOffsetChange}
+          />
+        </div>
+      )}
+    </div>
   );
 };
