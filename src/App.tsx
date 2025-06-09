@@ -11,7 +11,7 @@ import {
 } from "./App.module.scss";
 
 import {
-  Clock,
+  ClocksBlock,
   ModeSwitch,
   ResultBlock,
   TimeInput,
@@ -26,7 +26,7 @@ const App = () => {
       <Header />
       <main className={container}>
         <div className={clockRow}>
-          <Clock />
+          <ClocksBlock />
         </div>
         <ModeSwitch />
         <div className={convert}>

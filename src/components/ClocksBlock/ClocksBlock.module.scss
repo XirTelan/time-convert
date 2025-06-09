@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+.clocksRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  &.expanded {
+    display: flex !important;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.accordionBtn {
+  display: none;
+  background: var(--color-primary);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+
+  @media (max-width: 600px) {
+    display: inline-block;
+  }
+}
